@@ -12,20 +12,24 @@ class TextFieldDemoScreen extends StatefulWidget {
 class _TextFieldDemoScreenState extends State<TextFieldDemoScreen> {
 
   bool obscureText = false;
+  TextEditingController firstController = TextEditingController();
+  TextEditingController lastController = TextEditingController();
 
+  String title = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
-        title: const Text('Session 12', style: TextStyle(color: Colors.white),),
+        title:  Text(title, style: TextStyle(color: Colors.white),),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(children: [
 
           TextField(
+            controller: firstController,
             decoration: InputDecoration(
               hintText: 'First Name',
               labelText: 'First Namee',
@@ -39,6 +43,7 @@ class _TextFieldDemoScreenState extends State<TextFieldDemoScreen> {
           const Gap(20),
 
           TextField(
+            controller: lastController,
             decoration: InputDecoration(
                 hintText: 'Last Name',
               border: OutlineInputBorder(
@@ -92,9 +97,13 @@ class _TextFieldDemoScreenState extends State<TextFieldDemoScreen> {
               ),
               prefixIcon: const Icon(Icons.phone),
               prefixIconColor: Colors.red,
-
-
             ),
+            onChanged: (String text){
+              setState(() {
+                title = text;
+              });
+            },
+
           ),
 
           const Gap(20),
@@ -115,7 +124,23 @@ class _TextFieldDemoScreenState extends State<TextFieldDemoScreen> {
 
           Gap(20),
           ElevatedButton(onPressed: (){
-            Fluttertoast.showToast(msg: 'First Name will be displayed here');
+
+            String firstName = firstController.text.trim();
+            String lastName = lastController.text.trim();
+
+            if( firstName.isEmpty ){
+              Fluttertoast.showToast(msg: 'Please provide first name');
+              return;
+            }
+
+            if( lastName.isEmpty){
+              Fluttertoast.showToast(msg: 'Please provide last name');
+              return;
+            }
+
+            String fullName = '$firstName $lastName';
+            Fluttertoast.showToast(msg: 'Full Name $fullName');
+
           }, child: const Text('Submit'))
 
         ],),
