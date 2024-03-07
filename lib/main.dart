@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sbbwu_session12_textfields_forms_navigation/screens/first_screen.dart';
 import 'package:sbbwu_session12_textfields_forms_navigation/screens/simple_calculator.dart';
 import 'package:sbbwu_session12_textfields_forms_navigation/screens/textfield_demo_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SimpleCalculator(),
+      home: const FirstScreen(),
     );
   }
 }
